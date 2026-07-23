@@ -27,12 +27,18 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Load spaCy English model (small is fast; use "en_core_web_md" for better accuracy)
-try:
-    _NLP = spacy.load("en_core_web_sm")
-except OSError:
-    from spacy.cli import download as spacy_download
-    spacy_download("en_core_web_sm")
-    _NLP = spacy.load("en_core_web_sm")
+def _load_spacy_model() -> spacy.Language:
+    """Load the spaCy model, downloading it first if necessary."""
+    try:
+        return spacy.load("en_core_web_sm")
+    except OSError:
+        import subprocess, sys
+        subprocess.check_call(
+            [sys.executable, "-m", "pip", "install", "en_core_web_sm@https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl"]
+        )
+        return spacy.load("en_core_web_sm")
+
+_NLP = _load_spacy_model()
 
 
 # ──────────────────────────────────────────────
