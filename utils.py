@@ -26,21 +26,11 @@ import spacy
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# Load spaCy English model (small is fast; use "en_core_web_md" for better accuracy)
-def _load_spacy_model() -> spacy.Language:
-    """Load the spaCy model, installing it first if necessary."""
-    try:
-        return spacy.load("en_core_web_sm")
-    except OSError:
-        import subprocess
-        import sys
-        subprocess.check_call(
-            [sys.executable, "-m", "pip", "install",
-             "en_core_web_sm@https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl"],
-        )
-        return spacy.load("en_core_web_sm")
-
-_NLP = _load_spacy_model()
+# Load spaCy English model (installed via requirements.txt)
+try:
+    _NLP = spacy.load("en_core_web_sm")
+except OSError:
+    _NLP = None
 
 
 # ──────────────────────────────────────────────
@@ -174,15 +164,16 @@ def extract_keywords(text: str) -> list[str]:
         if kw in clean:
             found.append(kw)
     # Also grab noun-chunks from spaCy for domain-specific terms
-    doc = _NLP(clean)
-    for chunk in doc.noun_chunks:
-        phrase = chunk.text.strip()
-        if (
-            2 <= len(phrase) <= 40
-            and not all(t in _CUSTOM_STOPS for t in phrase.split())
-            and phrase not in found
-        ):
-            found.append(phrase)
+    if _NLP is not None:
+        doc = _NLP(clean)
+        for chunk in doc.noun_chunks:
+            phrase = chunk.text.strip()
+            if (
+                2 <= len(phrase) <= 40
+                and not all(t in _CUSTOM_STOPS for t in phrase.split())
+                and phrase not in found
+            ):
+                found.append(phrase)
     return found
 
 
