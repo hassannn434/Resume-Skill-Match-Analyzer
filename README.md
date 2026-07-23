@@ -1,131 +1,211 @@
-# Smart Student Accommodation & Rental Price Estimator
+# 📄 AI-Powered Resume Tracker & ATS Optimizer
 
-A machine learning-powered web application that predicts monthly rental prices for student accommodations based on property features, amenities, and location data.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.9+-blue?style=for-the-badge&logo=python" alt="Python">
+  <img src="https://img.shields.io/badge/Streamlit-1.32+-red?style=for-the-badge&logo=streamlit" alt="Streamlit">
+  <img src="https://img.shields.io/badge/scikit--learn-1.4+-orange?style=for-the-badge&logo=scikit-learn" alt="scikit-learn">
+  <img src="https://img.shields.io/badge/spaCy-3.7+-green?style=for-the-badge&logo=spacy" alt="spaCy">
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License">
+</p>
 
-## Project Overview
+An AI-powered web application that analyzes resumes against job descriptions, calculates ATS (Applicant Tracking System) match scores using **TF-IDF + Cosine Similarity**, extracts matched and missing keywords, and provides actionable recommendations to improve resume ranking.
 
-Finding affordable student housing is a common challenge. This project uses a **Random Forest Regressor** trained on a realistic synthetic dataset to estimate monthly rental prices across various property configurations. Users interact with a clean Streamlit dashboard, adjusting property features to receive instant price predictions.
+> Built by **Reina Chaturvedi** — reinachaturvedi09@gmail.com
 
-### Key Features
+---
 
-- **Synthetic Dataset Generation** -- Realistic rental data with 10 features and 2,000 samples
-- **ML Pipeline** -- Scikit-Learn `Pipeline` with preprocessing and model for clean inference
-- **Streamlit Dashboard** -- Interactive UI with sliders, selectboxes, and real-time predictions
-- **Model Artifacts** -- Serialized model, metrics, and dataset saved for reproducibility
-- **Feature Importance** -- Visual breakdown of which factors drive rental prices
+## 🎯 Project Overview
 
-## Tech Stack
+Most job seekers never know why their resume gets filtered out by ATS software. This tool bridges that gap by:
+
+- Parsing PDF and DOCX resumes programmatically
+- Comparing resume content against any job description using NLP
+- Computing a percentage-based match score
+- Identifying keywords the resume has — and the ones it's missing
+- Providing clear, actionable tips to improve the resume's ATS compatibility
+
+---
+
+## ✨ Key Features
+
+| Feature | Description |
+|---|---|
+| **PDF / DOCX Parsing** | Extracts text from both PDF and Word documents using `pdfplumber` and `python-docx` |
+| **TF-IDF Similarity Score** | Uses `scikit-learn`'s TF-IDF Vectorizer and Cosine Similarity for semantic matching |
+| **Keyword Matching** | Identifies 100+ technical and soft-skill keywords from the job description |
+| **Missing Keyword Detection** | Highlights skills the job requires but your resume lacks |
+| **Actionable Recommendations** | Generates context-aware tips to improve your resume's ATS score |
+| **Interactive Dashboard** | Clean, responsive Streamlit UI with metrics, keyword tags, and progress bars |
+| **spaCy NLP Integration** | Leverages named-entity recognition for deeper text analysis |
+| **Zero API Keys** | Fully local — no external APIs, no data leaves your machine |
+
+---
+
+## 🛠 Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Language | Python 3.10+ |
-| ML Framework | Scikit-Learn |
-| Web Framework | Streamlit |
-| Data Handling | Pandas, NumPy |
-| Serialization | Joblib |
+| **Frontend** | Streamlit |
+| **Backend / Logic** | Python 3.9+ |
+| **PDF Parsing** | pdfplumber |
+| **DOCX Parsing** | python-docx |
+| **Machine Learning** | scikit-learn (TF-IDF, Cosine Similarity) |
+| **NLP** | spaCy (en_core_web_sm) |
+| **Deployment** | Local / Streamlit Cloud |
 
-## Project Structure
+---
+
+## 📁 Project Structure
 
 ```
-smart-student-rental-estimator/
-├── model.py                  # Dataset generation, training, evaluation
-├── app.py                    # Streamlit web application
-├── requirements.txt          # Python dependencies
-├── README.md                 # Project documentation
-└── model_artifacts/          # Generated after running model.py
-    ├── rental_model.joblib   # Serialized trained model
-    ├── metrics.json          # Evaluation metrics
-    ├── dataset.csv           # Synthetic dataset
-    └── sample_input.json     # Sample input for reference
+ai-resume-tracker/
+├── app.py              # Streamlit web application (UI + entry point)
+├── utils.py            # Core logic: parsing, scoring, keyword extraction
+├── requirements.txt    # Python dependencies
+├── .gitignore          # Git ignore rules
+└── README.md           # This file
 ```
 
-## Installation
+---
+
+## 🚀 Installation & Setup
 
 ### Prerequisites
+- Python 3.9 or higher
+- pip (Python package manager)
 
-- Python 3.10 or higher
-- pip package manager
+### Step-by-Step
 
-### Setup
-
-1. Clone the repository:
+1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/smart-student-rental-estimator.git
-   cd smart-student-rental-estimator
+   git clone https://github.com/reinachaturvedi09/ai-resume-tracker.git
+   cd ai-resume-tracker
    ```
 
-2. Create a virtual environment:
+2. **Create a virtual environment (recommended)**
    ```bash
    python -m venv venv
-   source venv/bin/activate  # Windows: venv\Scripts\activate
+   # Windows:
+   venv\Scripts\activate
+   # macOS/Linux:
+   source venv/bin/activate
    ```
 
-3. Install dependencies:
+3. **Install dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-## How to Run Locally
+4. **Download the spaCy English model**
+   ```bash
+   python -m spacy download en_core_web_sm
+   ```
+   > **Note:** The app will auto-download this model on first run if it's missing.
 
-### Step 1 -- Train the Model
+5. **Run the application**
+   ```bash
+   streamlit run app.py
+   ```
 
-```bash
-python model.py
-```
+6. **Open your browser** — Navigate to `http://localhost:8501`
 
-This generates the synthetic dataset, trains a Random Forest Regressor, evaluates performance, and saves all artifacts to `model_artifacts/`.
+---
 
-### Step 2 -- Launch the Web App
+## 📖 Usage Guide
 
-```bash
-streamlit run app.py
-```
+1. **Paste the Job Description** — Copy the full job posting text into the text area on the left
+2. **Upload Your Resume** — Drag-and-drop or browse for a `.pdf` or `.docx` file on the right
+3. **Click "Analyze Resume"** — The app will process and display results instantly
 
-Open the local URL (default: `http://localhost:8501`) in your browser.
+### Understanding the Results
 
-### Step 3 -- Use the Dashboard
-
-1. Adjust property features in the sidebar
-2. Click **Predict Monthly Rent**
-3. View the estimated price, per-sq-ft cost, and annual breakdown
-4. Review model performance metrics and feature importance chart
-
-## Model Performance
-
-| Metric | Value |
+| Metric | What It Means |
 |---|---|
-| Test R² | 0.8867 |
-| Test RMSE | $58.39 |
-| Test MAE | $46.97 |
-| 5-Fold CV R² | 0.8888 |
+| **Match Score** | Overall TF-IDF cosine similarity (0–100%) between your resume and the job description |
+| **Matched Keywords** | Skills/keywords found in BOTH your resume and the job description |
+| **Missing Keywords** | Skills the job requires that are NOT found in your resume |
+| **Recommendations** | Actionable steps to improve your resume's ATS compatibility |
 
-## Features Used
+---
 
-| Feature | Type | Description |
-|---|---|---|
-| `square_footage` | Numeric | Total area in sq ft |
-| `bedrooms` | Numeric | Number of bedrooms (1-4) |
-| `distance_to_campus_km` | Numeric | Distance to nearest campus (km) |
-| `wifi_included` | Binary | Wi-Fi availability |
-| `furnished` | Binary | Furnished status |
-| `parking_available` | Binary | Parking availability |
-| `utilities_included` | Binary | Utilities in rent |
-| `pet_friendly` | Binary | Pet policy |
-| `laundry` | Categorical | in_unit / in_building / none |
-| `property_type` | Categorical | apartment / house / studio / shared_house |
+## 🔧 How It Works (Architecture)
 
-## Future Enhancements
+```
+┌──────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  User Input  │────▶│  text extraction │────▶│  text cleaning  │
+│  (PDF/DOCX   │     │  (pdfplumber /   │     │  & tokenization │
+│   + JD text) │     │   python-docx)   │     │  (regex + spaCy)│
+└──────────────┘     └──────────────────┘     └────────┬────────┘
+                                                        │
+                         ┌──────────────────────────────┤
+                         ▼                              ▼
+                ┌────────────────┐            ┌─────────────────┐
+                │  TF-IDF +      │            │  Keyword        │
+                │  Cosine        │            │  Extraction &   │
+                │  Similarity    │            │  Comparison     │
+                │  (scikit-learn)│            │  (spaCy NLP)    │
+                └───────┬────────┘            └────────┬────────┘
+                        │                              │
+                        ▼                              ▼
+                ┌─────────────────────────────────────────────┐
+                │           AnalysisResult                    │
+                │  • match_score   • matched_keywords         │
+                │  • missing_keywords   • recommendations     │
+                └──────────────────────┬──────────────────────┘
+                                       ▼
+                              ┌─────────────────┐
+                              │  Streamlit UI    │
+                              │  (Dashboard)     │
+                              └─────────────────┘
+```
 
-- **Real-world data integration** -- Scrape or connect to actual rental listing APIs (Zillow, Craigslist)
-- **Geospatial features** -- Add latitude/longitude for neighborhood-level pricing
-- **XGBoost / LightGBM comparison** -- Benchmark against gradient boosting models
-- **Neural network model** -- Experiment with PyTorch/TensorFlow regressors
-- **Docker deployment** -- Containerize the app for cloud deployment
-- **CI/CD pipeline** -- GitHub Actions for automated testing and deployment
-- **Multi-city support** -- Extend dataset to cover multiple metropolitan areas
-- **Time-series pricing** -- Track rental price trends over semesters
-- **Unit tests** -- Add pytest suite for model and API validation
+---
 
-## License
+## 🧪 Example
 
-MIT License. See `LICENSE` for details.
+**Job Description excerpt:**
+> "Looking for a Python Developer with experience in Django, REST APIs, PostgreSQL, AWS, Docker, and CI/CD pipelines."
+
+**Resume contains:** Python, Django, REST API, PostgreSQL
+
+**Result:**
+- Match Score: **72%**
+- Matched: `python`, `django`, `rest api`, `postgresql`
+- Missing: `aws`, `docker`, `ci/cd`
+- Recommendation: "Consider adding these missing keywords: aws, docker, ci/cd."
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👩‍💻 Author
+
+**Reina Chaturvedi**
+- 📧 reinachaturvedi09@gmail.com
+- 🐙 GitHub: [reinachaturvedi09](https://github.com/reinachaturvedi09)
+
+---
+
+## 🙏 Acknowledgements
+
+- [Streamlit](https://streamlit.io/) — Fast, beautiful web apps for data science
+- [scikit-learn](https://scikit-learn.org/) — ML library for TF-IDF and similarity
+- [spaCy](https://spacy.io/) — Industrial-strength NLP
+- [pdfplumber](https://github.com/jsvine/pdfplumber) — PDF text extraction
+- [python-docx](https://python-docx.readthedocs.io/) — DOCX parsing
