@@ -10,7 +10,7 @@
 
 An AI-powered web application that analyzes resumes against job descriptions, calculates ATS (Applicant Tracking System) match scores using **TF-IDF + Cosine Similarity**, extracts matched and missing keywords, and provides actionable recommendations to improve resume ranking.
 
-> Built by **Reina Chaturvedi** — reinachaturvedi09@gmail.com
+> Built by **Hassan Mahadkar** — hassanmahadker1@gmail.com
 
 ---
 
