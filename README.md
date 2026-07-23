@@ -196,9 +196,9 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ## 👩‍💻 Author
 
-**Reina Chaturvedi**
-- 📧 reinachaturvedi09@gmail.com
-- 🐙 GitHub: [reinachaturvedi09](https://github.com/reinachaturvedi09)
+**Hassan Mahadkar **
+- 📧 hassanmahadker1@gmail.com
+- 🐙 GitHub: https://github.com/hassannn434/
 
 ---
 
