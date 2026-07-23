@@ -191,7 +191,7 @@ def main():
     st.markdown("---")
     st.subheader("Feature Importance")
     try:
-        regressor = pipeline.named_steps["regressor"]
+        voting_reg = pipeline.named_steps["regressor"]
         feature_names_num = ["square_footage", "bedrooms", "distance_to_campus_km"]
         ohe = pipeline.named_steps["preprocessor"].transformers_[1][1]
         feature_names_cat = list(ohe.get_feature_names_out(
@@ -199,12 +199,14 @@ def main():
              "pet_friendly", "laundry", "property_type"]
         ))
         all_features = feature_names_num + feature_names_cat
-        importances = regressor.feature_importances_
+
+        gb_model = voting_reg.named_estimators_["gb"]
+        importances = gb_model.feature_importances_
         imp_df = pd.DataFrame({"Feature": all_features, "Importance": importances})
         imp_df = imp_df.sort_values("Importance", ascending=False)
         st.bar_chart(imp_df.set_index("Feature")["Importance"], horizontal=True)
-    except Exception:
-        st.info("Feature importance display unavailable.")
+    except Exception as e:
+        st.info(f"Feature importance display unavailable: {e}")
 
     st.markdown("---")
     st.caption("Built with Scikit-Learn and Streamlit | Smart Student Rental Price Estimator")

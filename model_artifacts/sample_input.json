@@ -1,0 +1,62 @@
+[
+  {
+    "square_footage": 816,
+    "bedrooms": 2,
+    "distance_to_campus_km": 1.8,
+    "wifi_included": 1,
+    "furnished": 1,
+    "parking_available": 1,
+    "utilities_included": 1,
+    "pet_friendly": 0,
+    "laundry": "in_building",
+    "property_type": "studio"
+  },
+  {
+    "square_footage": 810,
+    "bedrooms": 3,
+    "distance_to_campus_km": 1.7,
+    "wifi_included": 0,
+    "furnished": 1,
+    "parking_available": 1,
+    "utilities_included": 0,
+    "pet_friendly": 0,
+    "laundry": "in_unit",
+    "property_type": "house"
+  },
+  {
+    "square_footage": 1222,
+    "bedrooms": 3,
+    "distance_to_campus_km": 2.5,
+    "wifi_included": 1,
+    "furnished": 1,
+    "parking_available": 0,
+    "utilities_included": 1,
+    "pet_friendly": 0,
+    "laundry": "none",
+    "property_type": "studio"
+  },
+  {
+    "square_footage": 861,
+    "bedrooms": 2,
+    "distance_to_campus_km": 1.3,
+    "wifi_included": 1,
+    "furnished": 0,
+    "parking_available": 0,
+    "utilities_included": 0,
+    "pet_friendly": 0,
+    "laundry": "in_unit",
+    "property_type": "apartment"
+  },
+  {
+    "square_footage": 311,
+    "bedrooms": 1,
+    "distance_to_campus_km": 1.3,
+    "wifi_included": 1,
+    "furnished": 0,
+    "parking_available": 1,
+    "utilities_included": 1,
+    "pet_friendly": 0,
+    "laundry": "in_building",
+    "property_type": "apartment"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "train_MSE": 451.24,
+  "train_RMSE": 21.24,
+  "train_MAE": 16.77,
+  "train_R2": 0.9861,
+  "test_MSE": 3408.94,
+  "test_RMSE": 58.39,
+  "test_MAE": 46.97,
+  "test_R2": 0.8867,
+  "cv_r2_mean": 0.8888,
+  "cv_r2_std": 0.0059
+}
