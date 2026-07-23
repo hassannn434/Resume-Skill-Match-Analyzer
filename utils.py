@@ -32,9 +32,10 @@ def _load_spacy_model() -> spacy.Language:
     try:
         return spacy.load("en_core_web_sm")
     except OSError:
-        import subprocess, sys
+        import subprocess
+        import sys
         subprocess.check_call(
-            [sys.executable, "-m", "pip", "install", "en_core_web_sm@https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl"]
+            [sys.executable, "-m", "spacy", "download", "en_core_web_sm"],
         )
         return spacy.load("en_core_web_sm")
 
