@@ -28,14 +28,15 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # Load spaCy English model (small is fast; use "en_core_web_md" for better accuracy)
 def _load_spacy_model() -> spacy.Language:
-    """Load the spaCy model, downloading it first if necessary."""
+    """Load the spaCy model, installing it first if necessary."""
     try:
         return spacy.load("en_core_web_sm")
     except OSError:
         import subprocess
         import sys
         subprocess.check_call(
-            [sys.executable, "-m", "spacy", "download", "en_core_web_sm"],
+            [sys.executable, "-m", "pip", "install",
+             "en_core_web_sm@https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl"],
         )
         return spacy.load("en_core_web_sm")
 
